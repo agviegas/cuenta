@@ -213,6 +213,41 @@ td input:focus {
     margin: 0;
 }
 
+/* Static Payment List Styles */
+.static-list-container {
+    margin-top: 20px;
+}
+
+.static-list-container h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.static-payment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.static-payment-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+    font-weight: 500;
+    color: #495057;
+}
+
+.static-payment-list li:last-child {
+    margin-bottom: 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
