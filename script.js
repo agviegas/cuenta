@@ -3,20 +3,30 @@ const baseNumberInput = document.getElementById('baseNumber');
 const payerNameInput = document.getElementById('payerName');
 const singleExpensesAddRowBtn = document.getElementById('singleExpensesAddRowBtn');
 const singleExpensesTableBody = document.getElementById('singleExpensesTableBody');
+const sharedExpensesAddRowBtn = document.getElementById('sharedExpensesAddRowBtn');
+const sharedExpensesTableBody = document.getElementById('sharedExpensesTableBody');
 const nameInput = document.getElementById('nameInput');
 const addNameBtn = document.getElementById('addNameBtn');
 const namesList = document.getElementById('namesList');
 const resultText = document.getElementById('resultText');
 
 // Data storage
-let tableData = [];
-let names = [];
+const data = {
+    totalAmount: 0,
+    payerName: '',
+    singleExpenses: [],
+    sharedExpenses: [],
+    names: [],
+    result: '',
+}
 
 // Initialize the app
 function init() {
     // Add event listeners
     baseNumberInput.addEventListener('input', updateResult);
-    singleExpensesAddRowBtn.addEventListener('click', addTableRow);
+    singleExpensesAddRowBtn.addEventListener('click', () => addTableRow(singleExpensesTableBody));
+    sharedExpensesAddRowBtn.addEventListener('click', () => addTableRow(sharedExpensesTableBody));
+
     addNameBtn.addEventListener('click', addName);
     nameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addName();
@@ -24,14 +34,15 @@ function init() {
     payerNameInput.addEventListener('input', updateResult);
     
     // Add initial table row
-    addTableRow();
+    addTableRow(singleExpensesTableBody);
+    addTableRow(sharedExpensesTableBody);
     
     // Update result initially
     updateResult();
 }
 
 // Table functions
-function addTableRow() {
+function addTableRow(tableBody) {
     const row = document.createElement('tr');
     row.innerHTML = `
         <td><input type="text" placeholder="Name" class="description-input"></td>
@@ -39,7 +50,7 @@ function addTableRow() {
         <td><button class="btn btn-danger delete-row-btn">Delete</button></td>
     `;
     
-    singleExpensesTableBody.appendChild(row);
+    tableBody.appendChild(row);
     
     // Add event listeners to new inputs
     const descriptionInput = row.querySelector('.description-input');
@@ -60,7 +71,7 @@ function addTableRow() {
 function addName() {
     const name = nameInput.value.trim();
     if (name) {
-        names.push(name);
+        data.names.push(name);
         displayNames();
         nameInput.value = '';
         updateResult();
@@ -68,14 +79,14 @@ function addName() {
 }
 
 function removeName(index) {
-    names.splice(index, 1);
+    data.names.splice(index, 1);
     displayNames();
     updateResult();
 }
 
 function displayNames() {
     namesList.innerHTML = '';
-    names.forEach((name, index) => {
+    data.names.forEach((name, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
             <span>${name}</span>

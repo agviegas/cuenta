@@ -13,7 +13,6 @@
             <p class="subtitle">Sometimes some people want to pay just their part of the bill, while others want to share. <br> This app lets you compute it in seconds for free!</p>
         </div>
         
-        <!-- Number Input Section -->
         <div class="section">
             <h2>Step 1: Enter the total bill amount</h2>
             <div class="input-group">
@@ -26,11 +25,10 @@
             </div>
         </div>
 
-        <!-- Table Input Section -->
         <div class="section">
             <h2>Step 2: Enter who will pay just their part</h2>
             <div class="table-container">
-                <table id="dataTable">
+                <table id="singleExpensesTable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -46,9 +44,27 @@
             </div>
         </div>
 
-        <!-- List Input Section -->
         <div class="section">
-            <h2>Step 3: Enter who is invited (if any)</h2>
+            <h2>Step 3: Enter shared expenses (e.g. bread, etc.)</h2>
+            <div class="table-container">
+                <table id="sharedExpensesTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>How much?</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sharedExpensesTableBody">
+                        <!-- Rows will be added here dynamically -->
+                    </tbody>
+                </table>
+                <button id="sharedExpensesAddRowBtn" class="btn btn-secondary">Add Row</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Step 4: Enter who is invited (if any)</h2>
             <div class="list-container">
                 <div class="input-group">
                     <input type="text" id="nameInput" placeholder="Menganito">
@@ -62,7 +78,7 @@
 
         <!-- Result Section -->
         <div class="section">
-            <h2>Step 4: See the results</h2>
+            <h2>Step 5: See the results</h2>
             <div class="static-list-container">
                 <ul class="static-payment-list">
                     <li>Antonio has to pay 23</li>
