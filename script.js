@@ -32,8 +32,8 @@ function init() {
 function addTableRow() {
     const row = document.createElement('tr');
     row.innerHTML = `
-        <td><input type="text" placeholder="Enter description" class="description-input"></td>
-        <td><input type="number" placeholder="Enter value" class="value-input"></td>
+        <td><input type="text" placeholder="Name" class="description-input"></td>
+        <td><input type="number" placeholder="Payed amount" class="value-input"></td>
         <td><button class="btn btn-danger delete-row-btn">Delete</button></td>
     `;
     
