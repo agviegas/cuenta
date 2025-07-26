@@ -1,7 +1,8 @@
 // DOM Elements
 const baseNumberInput = document.getElementById('baseNumber');
-const addRowBtn = document.getElementById('addRowBtn');
-const tableBody = document.getElementById('tableBody');
+const payerNameInput = document.getElementById('payerName');
+const singleExpensesAddRowBtn = document.getElementById('singleExpensesAddRowBtn');
+const singleExpensesTableBody = document.getElementById('singleExpensesTableBody');
 const nameInput = document.getElementById('nameInput');
 const addNameBtn = document.getElementById('addNameBtn');
 const namesList = document.getElementById('namesList');
@@ -15,11 +16,12 @@ let names = [];
 function init() {
     // Add event listeners
     baseNumberInput.addEventListener('input', updateResult);
-    addRowBtn.addEventListener('click', addTableRow);
+    singleExpensesAddRowBtn.addEventListener('click', addTableRow);
     addNameBtn.addEventListener('click', addName);
     nameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') addName();
     });
+    payerNameInput.addEventListener('input', updateResult);
     
     // Add initial table row
     addTableRow();
@@ -37,7 +39,7 @@ function addTableRow() {
         <td><button class="btn btn-danger delete-row-btn">Delete</button></td>
     `;
     
-    tableBody.appendChild(row);
+    singleExpensesTableBody.appendChild(row);
     
     // Add event listeners to new inputs
     const descriptionInput = row.querySelector('.description-input');
@@ -85,38 +87,12 @@ function displayNames() {
 
 // Result computation
 function updateResult() {
-    const baseNumber = parseFloat(baseNumberInput.value) || 0;
-    
-    // Get table data
-    const rows = tableBody.querySelectorAll('tr');
-    tableData = [];
-    rows.forEach(row => {
-        const description = row.querySelector('.description-input').value;
-        const value = parseFloat(row.querySelector('.value-input').value) || 0;
-        if (description && value) {
-            tableData.push({ description, value });
-        }
-    });
-    
-    // Calculate result
-    let result = baseNumber;
-    
-    // Add all table values
-    tableData.forEach(item => {
-        result += item.value;
-    });
-    
-    // Multiply by number of names (if any)
-    if (names.length > 0) {
-        result *= names.length;
-    }
-    
-    // Display result
-    if (baseNumber === 0 && tableData.length === 0 && names.length === 0) {
-        resultText.textContent = 'Enter data to see the result';
-    } else {
-        resultText.textContent = `Result: ${result.toFixed(2)}`;
-    }
+   const totalAmount = parseFloat(baseNumberInput.value) || 0;
+   const payerName = payerNameInput.value.trim();
+   if(payerName.length === 0){
+    return;
+   }
+   console.log(payerName, totalAmount);
 }
 
 // Initialize when DOM is loaded
